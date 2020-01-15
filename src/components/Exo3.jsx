@@ -1,5 +1,11 @@
-import React from 'react'; 
- const Exo3 = ()=>{
-return(<div>
-</div>)};
- export default Exo3
+import React, { Fragment, useState } from 'react';
+const Exo3 = () => {
+    const [titre, setTitre] = useState('inconnu');
+    const [input, setInput] = useState('');
+    return (<Fragment>
+        <h2>Welcome {titre}</h2>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat consectetur provident minus, dolorum maxime excepturi natus nesciunt, perspiciatis quaerat vitae rerum pariatur aut dolores reprehenderit fugit similique laborum sapiente tempora?m</p>
+        <input type="text" onChange={e => setInput(e.target.value)} value={input} /><button className="btn btn-light" onClick={() => setTitre(input)}>go</button>
+    </Fragment>)
+};
+export default Exo3

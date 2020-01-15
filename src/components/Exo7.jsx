@@ -1,5 +1,4 @@
-import React from 'react'; 
+import React, { Fragment } from 'react'; 
  const Exo7 = ()=>{
-return(<div>
-</div>)};
+return(<Fragment></Fragment>)};
  export default Exo7
