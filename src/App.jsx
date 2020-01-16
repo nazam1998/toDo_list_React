@@ -12,14 +12,23 @@ import Exo6 from './components/Exo6';
 import Exo7 from './components/Exo7';
 
 const App = () => {
-    const [exo, setExo] = useState([{ div: <Exo1 />, etat: "d" }, { div: <Exo2 />, etat: "d" }, { div: <Exo3 />, etat: "d" }, { div: <Exo4 />, etat: "d" }, { div: <Exo5 img={Egg} />, etat: "d" }, { div: <Exo6 />, etat: "d" }, { div: <Exo7 />, etat: "d" }]);
+    const [exo, setExo] = useState([
+        { div: <Exo1 />, etat: "d-none", lien: 'col-3' },
+        { div: <Exo2 />, etat: "d-none", lien: 'col-3' },
+        { div: <Exo3 />, etat: "d-none", lien: 'col-3' },
+        { div: <Exo4 />, etat: "d-none", lien: 'col-3' },
+        { div: <Exo5 img={Egg} />, etat: "d-none", lien: 'col-3' },
+        { div: <Exo6 />, etat: "d-none", lien: 'col-3' },
+        { div: <Exo7 />, etat: "block", lien: 'col-3' }
+    ]);
 
     return (
         <div>
             <h1 className='text-center bg-primary text-white'>React JS</h1>
             <div className='container w-75'>
-                {/* <Nav exo={exo} setExo={setExo} /> */}
-                {exo.map((e, index) => <div className={'bg-secondary p-5 mt-4 ' + e.etat} key={index}>{e.div}</div>)}
+                <Nav exo={exo} setExo={setExo} />
+                {exo.map((e, index) => e.etat === 'block' && <div className={'bg-secondary p-5 mt-4'} key={index}>{e.div}</div>)}
+
             </div>
         </div>
     )

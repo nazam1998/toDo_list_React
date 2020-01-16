@@ -3,10 +3,12 @@ import React, { Fragment, useState } from 'react';
 const Exo1 = () => {
     const [titre, setTitre] = useState('Mon titre non modifié');
     const [color, setColor] = useState('');
+    
     const change = () => {
         setColor('bg-primary text-danger');
         setTitre('le titre modifié');
     }
+
     return (
         <Fragment>
             <h1 className={color}>{titre}</h1>

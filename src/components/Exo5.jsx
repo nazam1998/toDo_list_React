@@ -16,7 +16,7 @@ const Exo5 = (props) => {
         <button onClick={ajouter}>Ajouter un oeuf</button>
         <hr />
         <div>
-            {tabImg.map((e, index) => <img src={e} key={index} alt='' className='oeuf'/>)}
+            {tabImg.map((e, index) => <img src={e} key={index} alt='' className='oeuf' />)}
         </div>
     </Fragment>)
 };
