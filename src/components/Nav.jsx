@@ -4,7 +4,7 @@ const Nav = (props) => {
     const afficher = (e) => {
         let temp = [...props.exo];
         temp.forEach(element => {
-            element.etat = 'd-none';
+            element.etat = 'hide';
             element.lien = 'col-3';
         });
         temp[e.target.id].etat = 'block';

@@ -5,11 +5,11 @@ const Exo4 = () => {
         <h1>Déplacer les élément</h1>
         <div className="row mx-auto">
             <div className="col-5 rectangle bg-primary">
-                {count % 2 == 0 && <div className="carre bg-danger"></div>}
+                {count % 2 === 0 && <div className="carre bg-danger"></div>}
             </div>
 
             <div className="col-5 offset-1 rectangle bg-primary">
-                {count % 2 == 1 && <div className="carre bg-danger"></div>}
+                {count % 2 === 1 && <div className="carre bg-danger"></div>}
             </div>
         </div>
         <div className="text-center mt-5 row flex-column w-25 mx-auto">
