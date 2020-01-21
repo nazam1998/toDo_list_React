@@ -5,6 +5,7 @@ const Nav = (props) => {
     const afficher = (e) => {
 
         let temp = [...props.exo];
+        console.log(temp);
 
         temp.forEach(element => {
             element.etat = 'hide';

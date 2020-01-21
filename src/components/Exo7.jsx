@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 
 const Exo7 = () => {
@@ -11,9 +11,8 @@ const Exo7 = () => {
     const ajoute = (e) => {
         if (e.key === 'Enter') {
             let temp = [...tache];
-            temp.push({ text: e.target.value, className: 'row align-items-center justify-content-around w-100 text-left', etat: '', show: 'p' });
+            temp.push({ text: e.target.value, className: 'row align-items-center justify-content-around w-100 text-left', etat: '', input: e.target.value, show: 'p' });
             setTache(temp);
-
             e.target.value = '';
         }
     }
@@ -63,15 +62,21 @@ const Exo7 = () => {
         let temp = [...tabButton];
         temp.forEach(e => {
             e.etat = e.etat.replace('btn-primary text-white', 'text-primary gris');
-            console.log(e.etat);
-            
+
+
         });
-        
+
         temp[e.target.id].etat = temp[e.target.id].etat.replace('text-primary gris', 'btn-primary text-white');
-        console.log(temp[e.target.id].etat);
+
         setShow(temp[e.target.id].show);
         setTabButton(temp);
     }
+    const write = event => {
+        
+        let temp = [...tache];
+        temp[event.target.parentElement.id].input = event.target.value;
+        setTache(temp);
+    };
     return (
         <Fragment>
             <h1>Todo List</h1>
@@ -83,9 +88,9 @@ const Exo7 = () => {
             <div className="tache">
                 <hr />
 
-                {show === 'tout' && tache.map((e, index) => <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>)}
-                {show === 'fini' && tache.map((e, index) => (e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
-                {show === 'faire' && tache.map((e, index) => (!e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
+                {show === 'tout' && tache.map((e, index) => <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col-5'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' value={e.input} onChange={write} />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>)}
+                {show === 'fini' && tache.map((e, index) => (e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col-5'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' value={e.input} onChange={write} />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
+                {show === 'faire' && tache.map((e, index) => (!e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col-5'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' value={e.input} onChange={write} />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
             </div>
         </Fragment>
     )
