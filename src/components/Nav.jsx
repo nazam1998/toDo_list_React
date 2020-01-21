@@ -1,13 +1,17 @@
 import React from 'react';
+
 const Nav = (props) => {
-    // const exo = props.exo;
+
     const afficher = (e) => {
+
         let temp = [...props.exo];
+
         temp.forEach(element => {
             element.etat = 'hide';
             element.lien = 'col-3';
         });
-        temp[e.target.id].etat = 'block';
+
+        temp[e.target.id].etat = 'banane';
         temp[e.target.id].lien = 'col-3 bg-primary text-white';
         props.setExo(temp);
     }
@@ -18,4 +22,5 @@ const Nav = (props) => {
         </nav>
     )
 };
+
 export default Nav

@@ -1,16 +1,17 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 
 
 const Exo7 = () => {
 
     const [tache, setTache] = useState([]);
     const [show, setShow] = useState('tout');
-
+    const [tabButton, setTabButton] = useState([{ text: 'Toutes', etat: 'text-primary gris', show: 'tout' }, { text: 'Complétées', etat: 'text-primary gris', show: 'fini' }, { text: 'à faire', etat: 'text-primary gris', show: 'faire' }]);
     // Pour gérer les boutons il faut créer un tableau correspondant à chaque bouton
+
     const ajoute = (e) => {
         if (e.key === 'Enter') {
             let temp = [...tache];
-            temp.push({ text: e.target.value, className: 'row align-items-center justify-content-around w-100', etat: '', show: 'p' });
+            temp.push({ text: e.target.value, className: 'row align-items-center justify-content-around w-100 text-left', etat: '', show: 'p' });
             setTache(temp);
 
             e.target.value = '';
@@ -28,7 +29,7 @@ const Exo7 = () => {
     }
     const afficher = (e) => {
         let temp = [...tache];
-        e.target.nextElementSibling.value = e.target.textContent;
+        e.target.nextElementSibling.value = temp[e.target.parentElement.id].text;
         temp[e.target.parentElement.id].show = '';
         setTache(temp);
 
@@ -53,27 +54,38 @@ const Exo7 = () => {
             temp[e.target.parentElement.id].etat = true;
         } else {
             temp[e.target.parentElement.id].etat = false;
-            temp[e.target.parentElement.id].className.replace(' checked', '');
+            temp[e.target.parentElement.id].className = temp[e.target.parentElement.id].className.replace(' checked', '');
         }
+
         setTache(temp);
     }
-
+    const changeList = (e) => {
+        let temp = [...tabButton];
+        temp.forEach(e => {
+            e.etat = e.etat.replace('btn-primary text-white', 'text-primary gris');
+            console.log(e.etat);
+            
+        });
+        
+        temp[e.target.id].etat = temp[e.target.id].etat.replace('text-primary gris', 'btn-primary text-white');
+        console.log(temp[e.target.id].etat);
+        setShow(temp[e.target.id].show);
+        setTabButton(temp);
+    }
     return (
         <Fragment>
             <h1>Todo List</h1>
             <hr />
             <input type="text" placeholder='Que dois-je faire' onKeyPress={ajoute} className='w-100' />
             <div className="row mx-auto my-2 container justify-content-center">
-                <button className="ml-2 col-2 btn border border-primary text-primary gris" onClick={() => setShow('tout')}>Toutes</button>
-                <button className="ml-2 col-2 btn border border-primary text-primary gris" onClick={() => setShow('fini')}>Complétées</button>
-                <button className="ml-2 col-2 btn border border-primary text-primary gris" onClick={() => setShow('faire')}>à faire</button>
+                {tabButton.map((e, index) => <button key={index} id={index} className={"ml-2 col-2 btn border border-primary " + e.etat} onClick={changeList}>{e.text}</button>)}
             </div>
             <div className="tache">
                 <hr />
 
-                {show === 'tout' && tache.map((e, index) => <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show==='p'?<p onClick={afficher} className='col'>{e.text}</p>:<input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>)}
-                {show === 'fini' && tache.map((e, index) => (e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show==='p'?<p onClick={afficher} className='col'>{e.text}</p>:<input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
-                {show === 'faire' && tache.map((e, index) => (!e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show==='p'?<p onClick={afficher} className='col'>{e.text}</p>:<input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
+                {show === 'tout' && tache.map((e, index) => <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>)}
+                {show === 'fini' && tache.map((e, index) => (e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
+                {show === 'faire' && tache.map((e, index) => (!e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
             </div>
         </Fragment>
     )

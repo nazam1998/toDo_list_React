@@ -34,9 +34,7 @@ nav li {
 
 a {
   text-decoration: none;
-}
-a:hover {
-  text-decoration: none;
+  opacity: 1;
 }
 
 .tache li {
