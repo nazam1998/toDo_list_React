@@ -5,14 +5,13 @@ const Nav = (props) => {
     const afficher = (e) => {
 
         let temp = [...props.exo];
-        console.log(temp);
 
         temp.forEach(element => {
             element.etat = 'hide';
             element.lien = 'col-3';
         });
 
-        temp[e.target.id].etat = 'banane';
+        temp[e.target.id].etat = 'show';
         temp[e.target.id].lien = 'col-3 bg-primary text-white';
         props.setExo(temp);
     }

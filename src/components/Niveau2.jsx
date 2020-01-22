@@ -4,7 +4,7 @@ const Niveau2 = () => {
 
     const [input, setInput] = useState('');
 
-    const [p, setP] = useState('');
+    const [p, setP] = useState(0);
 
     const [op, setOp] = useState('');
 
@@ -18,7 +18,7 @@ const Niveau2 = () => {
     let tab = [{ nb: nb, fct: setNb }, { nb: nb2, fct: setNb2 }]
 
     const egal = () => {
-        setP(p + save);
+        // setP(p + save);
         switch (op) {
             case '+':
                 setP(save + ' = ' + (Number(nb) + Number(nb2)));
@@ -47,7 +47,7 @@ const Niveau2 = () => {
     const ajoute = (e) => {
 
         setInput(input + e.target.innerText);
-        setSave(save + e.target.innerText); 
+        setSave(save + e.target.innerText);
         tab[count].fct(tab[count].nb + e.target.innerText);
 
     }
@@ -61,7 +61,7 @@ const Niveau2 = () => {
     }
     const clear = () => {
         setInput('');
-        setP(0);     
+        setP(0);
         setCount(0);
         setNb('');
         setNb2('');
@@ -70,12 +70,11 @@ const Niveau2 = () => {
     return (
         <div className='niveau2 mt-5'>
             <h1>Niveau2</h1>
-            <div className="calculatrice  bg-dark text-white p-5 w-50">
+            <div className="calculatrice  bg-dark text-white p-5">
                 <div className="resultat w-75">
                     <p className='text-right'>{p}</p>
                     <input type="text" className='text-dark' value={input} onChange={() => setInput(input)} />
                 </div>
-
                 <div className="boutons">
                     <button className="btn btn-light col-2 ml-2 mt-3" onClick={ajoute}>1</button>
                     <button className="btn btn-light col-2 ml-2 mt-3" onClick={ajoute}>2</button>

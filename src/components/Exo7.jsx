@@ -7,11 +7,19 @@ const Exo7 = () => {
     const [show, setShow] = useState('tout');
     const [tabButton, setTabButton] = useState([{ text: 'Toutes', etat: 'text-primary gris', show: 'tout' }, { text: 'Complétées', etat: 'text-primary gris', show: 'fini' }, { text: 'à faire', etat: 'text-primary gris', show: 'faire' }]);
     // Pour gérer les boutons il faut créer un tableau correspondant à chaque bouton
-
+    const estVide = e => {
+        let vide = true;
+        let i = 0;
+        while (i < e.length && vide) {
+            vide = e.charAt(i) === " ";
+            i++;
+        }
+        return vide;
+    }
     const ajoute = (e) => {
         if (e.key === 'Enter') {
             let temp = [...tache];
-            temp.push({ text: e.target.value, className: 'row align-items-center justify-content-around w-100 text-left', etat: '', input: e.target.value, show: 'p' });
+            temp.push({ text: (e.target.value !== '' ? (!estVide(e.target.value) ? e.target.value : 'Template') : 'Template'), className: 'row align-items-center justify-content-around p-1 w-100 text-left', etat: '', input: e.target.value, show: 'p' });
             setTache(temp);
             e.target.value = '';
         }
@@ -72,7 +80,7 @@ const Exo7 = () => {
         setTabButton(temp);
     }
     const write = event => {
-        
+
         let temp = [...tache];
         temp[event.target.parentElement.id].input = event.target.value;
         setTache(temp);
@@ -88,9 +96,9 @@ const Exo7 = () => {
             <div className="tache">
                 <hr />
 
-                {show === 'tout' && tache.map((e, index) => <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col-5'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' value={e.input} onChange={write} />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>)}
-                {show === 'fini' && tache.map((e, index) => (e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col-5'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' value={e.input} onChange={write} />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
-                {show === 'faire' && tache.map((e, index) => (!e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col-5'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' value={e.input} onChange={write} />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
+                {show === 'tout' && tache.map((e, index) => <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col-5 my-auto'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' value={e.input} onChange={write} />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>)}
+                {show === 'fini' && tache.map((e, index) => (e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col-5 my-auto'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' value={e.input} onChange={write} />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
+                {show === 'faire' && tache.map((e, index) => (!e.etat && <li className={e.className} id={index} key={index}><input type='checkbox' checked={e.etat} onChange={color} className='ml-2 col' />{(e.show === 'p' ? <p onClick={afficher} className='col-5 my-auto'>{e.text}</p> : <input type="text" onKeyPress={changer} onDoubleClick={afficher2} className='col-5' value={e.input} onChange={write} />)}<span className='offset-5 remover col' onClick={retire}>X</span></li>))}
             </div>
         </Fragment>
     )
