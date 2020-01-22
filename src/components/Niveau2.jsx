@@ -101,4 +101,5 @@ const Niveau2 = () => {
         </div>
     )
 };
+
 export default Niveau2

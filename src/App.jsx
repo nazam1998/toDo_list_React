@@ -14,13 +14,13 @@ import Exo7 from './components/Exo7';
 const App = () => {
     const [exo, setExo] = useState([
 
-        { div: <Exo1 />, etat: "show", lien: 'col-3' },
-        { div: <Exo2 />, etat: "hide", lien: 'col-3' },
-        { div: <Exo3 />, etat: "hide", lien: 'col-3' },
-        { div: <Exo4 />, etat: "hide", lien: 'col-3' },
-        { div: <Exo5 img={Egg} />, etat: "hide", lien: 'col-3' },
-        { div: <Exo6 />, etat: "hide", lien: 'col-3' },
-        { div: <Exo7 />, etat: "hide", lien: 'col-3' }
+        { div: <Exo1 />, etat: "show", lien: 'col-3 text-primary' },
+        { div: <Exo2 />, etat: "hide", lien: 'col-3 text-primary' },
+        { div: <Exo3 />, etat: "hide", lien: 'col-3 text-primary' },
+        { div: <Exo4 />, etat: "hide", lien: 'col-3 text-primary' },
+        { div: <Exo5 img={Egg} />, etat: "hide", lien: 'col-3 text-primary' },
+        { div: <Exo6 />, etat: "hide", lien: 'col-3 text-primary' },
+        { div: <Exo7 />, etat: "hide", lien: 'col-3 text-primary' }
 
     ]);
 

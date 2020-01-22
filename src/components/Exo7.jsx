@@ -17,11 +17,14 @@ const Exo7 = () => {
         return vide;
     }
     const ajoute = (e) => {
+
         if (e.key === 'Enter') {
+
             let temp = [...tache];
             temp.push({ text: (e.target.value !== '' ? (!estVide(e.target.value) ? e.target.value : 'Template') : 'Template'), className: 'row align-items-center justify-content-around p-1 w-100 text-left', etat: '', input: e.target.value, show: 'p' });
             setTache(temp);
             e.target.value = '';
+            
         }
     }
 
